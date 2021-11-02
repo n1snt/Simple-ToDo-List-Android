@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/todo_bottom_nav"
+        android:title="ToDo"
+        android:icon="@drawable/ic_outline_done_24"/>
+
+    <item
+        android:id="@+id/done_bottom_nav"
+        android:title="Done"
+        android:icon="@drawable/ic_baseline_done_all_24"/>
+
+    <item
+        android:id="@+id/settings_bottom_nav"
+        android:title="Settings"
+        android:icon="@drawable/ic_outline_settings_24"/>
+
+</menu>
