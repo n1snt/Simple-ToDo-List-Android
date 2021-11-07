@@ -1,2 +1,2 @@
-# Simple-ToDo-List-Android
+# Simple ToDo List.
 A simple ToDo list app for android.
