@@ -2,6 +2,7 @@ package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.tasksLis
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,10 +54,16 @@ class ToDoAdapter(private val todoList: List<ToDo>):
                 val taskCheckBox = itemView.findViewById<CheckBox>(R.id.checkBoxTask)
                 taskCheckBox.isChecked = data.task_done
 
+                taskCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+                    // Save value to database.
+                    // Change value in list.
+
+                    Log.d("Lmao",b.toString())
+                }
+
                 // Setup options later.
                 // Plox setup options here to delete etc.
 
             }
         }
-
 }

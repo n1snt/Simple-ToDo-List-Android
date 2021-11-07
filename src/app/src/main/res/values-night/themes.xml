@@ -12,5 +12,6 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/black</item>
         <item name="android:navigationBarColor">@color/grey</item>
+        <item name="colorSurface">@color/black</item>
     </style>
 </resources>

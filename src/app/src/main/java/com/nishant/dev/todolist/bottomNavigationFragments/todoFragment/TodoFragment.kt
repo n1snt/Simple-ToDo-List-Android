@@ -137,15 +137,17 @@ class TodoFragment: Fragment() {
             //val todoList: List<ToDo>? = todoDao?.getTasks()
             //val doneTasks: List<ToDo>? = todoDao?.getDoneTasks()
 
-            if (todoList?.size!! > 0) {
-
+            /*
+            This is a patch to fix tasks not appearing properly in recyclerview
+            when there are no tasks in recyclerview.
+            */
+            if (todoList?.size!! == 0) {
+                todoAdapter.notifyItemInserted(0)
+            }
+            else {
                 todoList?.size?.minus(1)?.let {
                     todoAdapter.notifyItemInserted(it)
                 }
-            }
-
-            else {
-                todoAdapter.notifyItemInserted(0)
             }
 
         }
