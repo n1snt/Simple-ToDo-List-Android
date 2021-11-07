@@ -1,5 +1,6 @@
 package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Dao
+import androidx.room.Room
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -17,9 +22,19 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nishant.dev.todolist.R
+import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.tasksList.ToDoAdapter
+import com.nishant.dev.todolist.database.ToDo
+import com.nishant.dev.todolist.database.ToDoDao
+import com.nishant.dev.todolist.database.ToDoDatabase
 import org.w3c.dom.Text
 
 class TodoFragment: Fragment() {
+
+    lateinit var todoAdapter: ToDoAdapter
+
+    private var dbInstance: ToDoDatabase? = null
+    private lateinit var todoDao: ToDoDao
+    var todoList: MutableList<ToDo>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +61,30 @@ class TodoFragment: Fragment() {
                 }
             }
         }
+
+        val tasksRecyclerView = inf.findViewById<RecyclerView>(R.id.todoRecyclerView)
+
+        // Setup database instance.
+        dbInstance =
+            context?.let {
+                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
+                    .allowMainThreadQueries()
+                    .build()
+            }
+
+        // Get DAO.
+        todoDao = dbInstance?.todoDao()!!
+
+        // Get tasks from database.
+        todoList = todoDao.getTasks()
+
+        Log.d("List",todoList.toString())
+
+        todoAdapter = ToDoAdapter(todoList!!)
+
+        tasksRecyclerView.layoutManager = LinearLayoutManager(context)
+        tasksRecyclerView.adapter = todoAdapter
+
         return inf
     }
 
@@ -69,6 +108,7 @@ class TodoFragment: Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addTask(titleTask: EditText, descriptionTask: EditText) {
 
         // Validate title of task.
@@ -79,6 +119,35 @@ class TodoFragment: Fragment() {
         if(txtViewsValid) {
             // Add task to database.
             Log.d("Add task to db", "Plox")
+
+            // Setup data to save in DB.
+            val testing = ToDo(
+                id=null,
+                task_title = titleTask.text.toString(),
+                task_description = descriptionTask.text.toString(),
+            )
+
+            // Add data to database.
+            todoDao.addTask(testing)
+
+            // Add to the db list above.
+            todoList?.add(testing)
+
+            // This is testing stuff to retrieve data from database.
+            //val todoList: List<ToDo>? = todoDao?.getTasks()
+            //val doneTasks: List<ToDo>? = todoDao?.getDoneTasks()
+
+            if (todoList?.size!! > 0) {
+
+                todoList?.size?.minus(1)?.let {
+                    todoAdapter.notifyItemInserted(it)
+                }
+            }
+
+            else {
+                todoAdapter.notifyItemInserted(0)
+            }
+
         }
         else if (!txtViewsValid) {
             // Do not add and disable button.
