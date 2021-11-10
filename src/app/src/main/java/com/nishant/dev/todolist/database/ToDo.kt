@@ -17,6 +17,9 @@ data class ToDo(
     // Is task marked as done?
     @ColumnInfo(name="task_done") val task_done: Boolean = false,
 
+    // Is task moved to doing?
+    @ColumnInfo(name="task_in_doing") var task_in_doing: Boolean = false,
+
     // Is task moved to done?
-    @ColumnInfo(name="task_in_done") val task_in_done: Boolean? = false
+    @ColumnInfo(name="task_in_done") val task_in_done: Boolean = false,
 )
