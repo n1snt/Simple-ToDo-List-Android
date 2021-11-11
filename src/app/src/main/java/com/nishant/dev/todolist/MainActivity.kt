@@ -11,6 +11,8 @@ import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.TodoFragm
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        supportActionBar?.title = "In progress"
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -32,12 +34,15 @@ class MainActivity : AppCompatActivity() {
         navBar.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.done_bottom_nav -> {
+                    supportActionBar?.title = "Done"
                     setFragment(doneFragment)
                 }
                 R.id.todo_bottom_nav -> {
+                    supportActionBar?.title = "Todo"
                     setFragment(todoFragment)
                 }
                 R.id.doing_bottom_nav -> {
+                    supportActionBar?.title = "In progress"
                     setFragment(doingFragment)
                 }
                 else -> false

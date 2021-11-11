@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.google.android.material.button.MaterialButton
 import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
+import com.nishant.dev.todolist.database.ToDoDatabase
 import net.cachapa.expandablelayout.ExpandableLayout
 
 
-class ToDoAdapter(private val todoList: List<ToDo>, private val todoDao: ToDoDao):
+class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: ToDoDao):
     RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
     var todoListData = todoList
@@ -32,20 +34,6 @@ class ToDoAdapter(private val todoList: List<ToDo>, private val todoDao: ToDoDao
     }
 
     override fun onBindViewHolder(holder: ToDoAdapter.ViewHolder, position: Int) {
-
-        /*
-        val isExpanded = position === mExpandedPosition
-        holder.details.setVisibility(if (isExpanded) View.VISIBLE else View.GONE)
-        holder.itemView.isActivated = isExpanded
-
-        if (isExpanded) previousExpandedPosition = position
-
-        holder.itemView.setOnClickListener {
-            mExpandedPosition = if (isExpanded) -1 else position
-            notifyItemChanged(previousExpandedPosition)
-            notifyItemChanged(position)
-        }
-         */
 
         val taskOptionsView = holder.itemView.findViewById<ExpandableLayout>(R.id.taskOptions)
         holder.itemView.setOnClickListener {
@@ -83,11 +71,25 @@ class ToDoAdapter(private val todoList: List<ToDo>, private val todoDao: ToDoDao
                 val taskDescription = itemView.findViewById<TextView>(R.id.TodoTaskDescription)
                 taskDescription.text = data.task_description
 
+                // Setup database instance.
+                val dbInstance =
+                    context?.let {
+                        Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
+                            .allowMainThreadQueries()
+                            .build()
+                    }
+
+                // Get DAO.
+                val todoDao = dbInstance?.todoDao()!!
+
                 // Set edit onclick.
                 val editButton = itemView.findViewById<MaterialButton>(R.id.TodoEditTask)
                 editButton.setOnClickListener {
                     // Add code here.
                     Log.d("LOL", "lmao")
+
+                    // Launch add task dialog.
+                    // Then edit the task from there.
                 }
 
                 // Set delete onclick.
@@ -95,6 +97,17 @@ class ToDoAdapter(private val todoList: List<ToDo>, private val todoDao: ToDoDao
                 deleteButton.setOnClickListener {
                     // Add more code here.
                     Log.d("LOL", "This works")
+
+                    // Delete from database.
+                    // Delete by passing todoobj from todolistdata.
+                    todoDao.deleteTask(data)
+
+                    // Delete from list.
+                    todoListData.removeAt(adapterPosition)
+
+                    // Notify adapter that item is removed & the range of list is changed.
+                    notifyItemRemoved(adapterPosition)
                 }
             }
-        } }
+        }
+    }
