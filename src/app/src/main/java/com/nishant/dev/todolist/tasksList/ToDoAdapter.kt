@@ -57,13 +57,6 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
 
                 val data = todoListData[adapterPosition]
 
-                // Set move to in progress button.
-                val inProgress = itemView.findViewById<MaterialButton>(R.id.moveToInProgressButton)
-                inProgress.setOnClickListener {
-                    // Add logic here plox.
-                    Log.d("Lmao" ,"Works")
-                }
-
                 // Set Title.
                 val taskTitle = itemView.findViewById<TextView>(R.id.taskTitle)
                 taskTitle.text = data.task_title
@@ -129,6 +122,26 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
 
                     // Notify adapter that item is removed & the range of list is changed.
                     notifyItemRemoved(adapterPosition)
+                }
+
+                // Set move to in progress button.
+                val inProgress = itemView.findViewById<MaterialButton>(R.id.moveToInProgressButton)
+                inProgress.setOnClickListener {
+                    // Add logic here plox.
+
+                    // Update value in list.
+                    data.task_in_doing = true
+
+                    // Change value in database.
+                    todoDao.updateTask(data)
+
+                    // Remove item from list.
+                    todoListData.removeAt(adapterPosition)
+
+                    // Notify adapter that item is removed & the range of list is changed.
+                    notifyItemRemoved(adapterPosition)
+
+                    Log.d("Lmao" ,"Works")
                 }
             }
         }
