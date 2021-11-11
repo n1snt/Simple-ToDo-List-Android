@@ -22,8 +22,9 @@ interface ToDoDao {
     fun markDoing(id: Int, doingVal: Boolean)
 
     @Update()
-    fun markDone(todo: ToDo)
+    fun updateTask(todo: ToDo)
 
     @Delete()
     fun deleteTask(todo: ToDo)
+
 }

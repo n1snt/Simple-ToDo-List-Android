@@ -46,7 +46,7 @@ class TodoFragment: Fragment() {
         addTaskButton.setOnClickListener{
             context?.let { it1 ->
                 MaterialDialog(it1, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                    customView(R.layout.fragment_add_task_dialog, horizontalPadding = true)
+                    customView(R.layout.fragment_task_dialog, horizontalPadding = true)
                     negativeButton(text="Cancel")
                     positiveButton(text="Add") { dialog ->
 

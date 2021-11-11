@@ -6,15 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.button.MaterialButton
 import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
-import com.nishant.dev.todolist.database.ToDoDatabase
 import net.cachapa.expandablelayout.ExpandableLayout
 
 
@@ -24,7 +26,6 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
     var todoListData = todoList
 
     private var context: Context? = null
-    private var mExpandedPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoAdapter.ViewHolder {
         context = parent.context
@@ -71,25 +72,46 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
                 val taskDescription = itemView.findViewById<TextView>(R.id.TodoTaskDescription)
                 taskDescription.text = data.task_description
 
-                // Setup database instance.
-                val dbInstance =
-                    context?.let {
-                        Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
-                            .allowMainThreadQueries()
-                            .build()
-                    }
-
-                // Get DAO.
-                val todoDao = dbInstance?.todoDao()!!
-
                 // Set edit onclick.
                 val editButton = itemView.findViewById<MaterialButton>(R.id.TodoEditTask)
                 editButton.setOnClickListener {
                     // Add code here.
-                    Log.d("LOL", "lmao")
 
-                    // Launch add task dialog.
-                    // Then edit the task from there.
+                    // Launch edit task dialog.
+                    context?.let { it1 ->
+                        MaterialDialog(it1, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+
+                            // Set custom view.
+                            customView(R.layout.fragment_task_dialog, horizontalPadding = true)
+
+                            // Set title in the custom view.
+                            findViewById<TextView>(R.id.fragmentTaskTitle).text = "Edit task"
+
+                            // Set task title and description from DB to edit.
+                            val taskTitleEditTxt = findViewById<EditText>(R.id.add_task_dialog_title)
+                            taskTitleEditTxt.setText(data.task_title)
+                            val taskDescEditTxt = findViewById<EditText>(R.id.add_task_dialog_task_description)
+                            taskDescEditTxt.setText(data.task_description)
+
+                            negativeButton(text="Cancel")
+                            positiveButton(text="Edit") { dialog ->
+
+                                // Get edited text from edittext.
+                                Log.d("Title text", taskTitleEditTxt.text.toString())
+                                Log.d("Desc text", taskDescEditTxt.text.toString())
+
+                                // Change in list.
+                                data.task_title = taskTitleEditTxt.text.toString()
+                                data.task_description = taskDescEditTxt.text.toString()
+
+                                // Change in DB.
+                                todoDao.updateTask(data)
+
+                                // Notify plox.
+                                notifyItemChanged(adapterPosition)
+                            }
+                        }
+                    }
                 }
 
                 // Set delete onclick.

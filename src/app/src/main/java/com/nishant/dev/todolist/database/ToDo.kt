@@ -11,8 +11,8 @@ data class ToDo(
     @PrimaryKey(autoGenerate = true) val id: Int?,
 
     // Task title & description.
-    @ColumnInfo(name = "task_title") val task_title: String?,
-    @ColumnInfo(name = "task_description") val task_description: String?,
+    @ColumnInfo(name = "task_title") var task_title: String?,
+    @ColumnInfo(name = "task_description") var task_description: String?,
 
     // Is task marked as done?
     @ColumnInfo(name="task_done") val task_done: Boolean = false,
