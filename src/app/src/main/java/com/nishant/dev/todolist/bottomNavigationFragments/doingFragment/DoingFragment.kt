@@ -12,7 +12,10 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import com.nishant.dev.todolist.database.ToDoDatabase
 
-class DoingFragment: Fragment() {
+class DoingFragment(dbDao: ToDoDao): Fragment() {
+
+    // Get dao to access database.
+    val dbDao = dbDao
 
     private var dbInstance: ToDoDatabase? = null
     private lateinit var todoDao: ToDoDao
@@ -23,7 +26,7 @@ class DoingFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val inf =  inflater.inflate(R.layout.fragment_doing, container, false)
+        val inf =  inflater.inflate(R.layout.fragment_in_progress, container, false)
 
         // Setup database instance.
         dbInstance =
@@ -38,6 +41,9 @@ class DoingFragment: Fragment() {
 
         doingList = todoDao.getDoingTasks()
         Log.d("DoneTasks", doingList.toString())
+
+        // Send data to recyclerview adapter.
+
 
         return inf
     }

@@ -3,10 +3,12 @@ package com.nishant.dev.todolist
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nishant.dev.todolist.bottomNavigationFragments.doingFragment.DoingFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.doneFragment.DoneFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.TodoFragment
+import com.nishant.dev.todolist.database.ToDoDatabase
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +18,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val doneFragment = DoneFragment()
-        val todoFragment = TodoFragment()
-        val doingFragment = DoingFragment()
+        // Setup database instance.
+        val dbInstance =
+            this.let {
+                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
+                    .allowMainThreadQueries()
+                    .build()
+            }
+
+        // Get DAO.
+        val todoDao = dbInstance.todoDao()
+
+        val doneFragment = DoneFragment(todoDao)
+        val todoFragment = TodoFragment(todoDao)
+        val doingFragment = DoingFragment(todoDao)
 
         // Initialize activity by setting the default launch fragment to
         // TodoFragment
@@ -29,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         // Set listener for bottom nav bar.
         val navBar = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
 
-        navBar.selectedItemId = R.id.doing_bottom_nav
+        navBar.selectedItemId = R.id.in_progress_bottom_nav
 
         navBar.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
@@ -41,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title = "Todo"
                     setFragment(todoFragment)
                 }
-                R.id.doing_bottom_nav -> {
+                R.id.in_progress_bottom_nav -> {
                     supportActionBar?.title = "In progress"
                     setFragment(doingFragment)
                 }

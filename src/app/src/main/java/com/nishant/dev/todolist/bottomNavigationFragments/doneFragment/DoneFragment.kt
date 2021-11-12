@@ -12,10 +12,11 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import com.nishant.dev.todolist.database.ToDoDatabase
 
-class DoneFragment: Fragment() {
+class DoneFragment(dbDao: ToDoDao) : Fragment() {
 
-    private var dbInstance: ToDoDatabase? = null
-    private lateinit var todoDao: ToDoDao
+    // Get dao to access database.
+    val dbDao = dbDao
+
     var doneList: MutableList<ToDo>? = null
 
     override fun onCreateView(
@@ -25,18 +26,7 @@ class DoneFragment: Fragment() {
     ): View? {
         val inf =  inflater.inflate(R.layout.fragment_done, container, false)
 
-        // Setup database instance.
-        dbInstance =
-            context?.let {
-                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
-                    .allowMainThreadQueries()
-                    .build()
-            }
-
-        // Get DAO.
-        todoDao = dbInstance?.todoDao()!!
-
-        doneList = todoDao.getDoneTasks()
+        doneList = dbDao.getDoneTasks()
         Log.d("DoneTasks", doneList.toString())
 
         return inf

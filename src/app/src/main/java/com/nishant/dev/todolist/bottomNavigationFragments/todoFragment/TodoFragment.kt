@@ -24,12 +24,13 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import com.nishant.dev.todolist.database.ToDoDatabase
 
-class TodoFragment: Fragment() {
+class TodoFragment(dbDao: ToDoDao): Fragment() {
+
+    // Get dao to access database.
+    val dbDao = dbDao
 
     lateinit var todoAdapter: ToDoAdapter
 
-    private var dbInstance: ToDoDatabase? = null
-    private lateinit var todoDao: ToDoDao
     var todoList: MutableList<ToDo>? = null
 
     override fun onCreateView(
@@ -60,23 +61,12 @@ class TodoFragment: Fragment() {
 
         val tasksRecyclerView = inf.findViewById<RecyclerView>(R.id.todoRecyclerView)
 
-        // Setup database instance.
-        dbInstance =
-            context?.let {
-                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
-                    .allowMainThreadQueries()
-                    .build()
-            }
-
-        // Get DAO.
-        todoDao = dbInstance?.todoDao()!!
-
         // Get tasks from database.
-        todoList = todoDao.getTasks()
+        todoList = dbDao.getTasks()
 
         Log.d("List",todoList.toString())
 
-        todoAdapter = ToDoAdapter(todoList!!, todoDao)
+        todoAdapter = ToDoAdapter(todoList!!, dbDao)
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
         tasksRecyclerView.adapter = todoAdapter
@@ -124,7 +114,7 @@ class TodoFragment: Fragment() {
             )
 
             // Add data to database.
-            todoDao.addTask(testing)
+            dbDao.addTask(testing)
 
             // Add to the db list above.
             todoList?.add(testing)

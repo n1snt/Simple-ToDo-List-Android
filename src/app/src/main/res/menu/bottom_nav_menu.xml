@@ -7,14 +7,13 @@
         android:icon="@drawable/ic_outline_done_24"/>
 
     <item
-        android:id="@+id/doing_bottom_nav"
-        android:title="Doing"
+        android:id="@+id/in_progress_bottom_nav"
+        android:title="In Progress"
         android:icon="@drawable/ic_outline_doing_24"/>
 
     <item
         android:id="@+id/done_bottom_nav"
         android:title="Done"
         android:icon="@drawable/ic_baseline_done_all_24"/>
-
 
 </menu>
