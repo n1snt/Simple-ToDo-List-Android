@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nishant.dev.todolist.bottomNavigationFragments.doingFragment.DoingFragment
+import com.nishant.dev.todolist.bottomNavigationFragments.inProgressFragment.InProgressFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.doneFragment.DoneFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.TodoFragment
 import com.nishant.dev.todolist.database.ToDoDatabase
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         supportActionBar?.title = "In progress"
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val doneFragment = DoneFragment(todoDao)
         val todoFragment = TodoFragment(todoDao)
-        val doingFragment = DoingFragment(todoDao)
+        val doingFragment = InProgressFragment(todoDao)
 
         // Initialize activity by setting the default launch fragment to
         // TodoFragment

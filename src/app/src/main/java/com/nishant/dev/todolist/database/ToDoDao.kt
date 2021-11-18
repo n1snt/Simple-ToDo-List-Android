@@ -13,7 +13,7 @@ interface ToDoDao {
     fun getTasks(): MutableList<ToDo>
 
     @Query("SELECT * FROM todo WHERE task_in_doing IS 1 ORDER BY rowid ASC")
-    fun getDoingTasks(): MutableList<ToDo>
+    fun getInProgressTasks(): MutableList<ToDo>
 
     @Query("SELECT * FROM todo WHERE task_done IS 1 ORDER BY rowid ASC")
     fun getDoneTasks(): MutableList<ToDo>

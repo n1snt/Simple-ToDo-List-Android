@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.tasksList
+package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -30,7 +30,7 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoAdapter.ViewHolder {
         context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recycler_view_task , parent, false)
+            R.layout.recycler_view_todo_task , parent, false)
         return ViewHolder(view)
     }
 
@@ -47,7 +47,6 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
     override fun getItemCount(): Int {
         return todoList.size
     }
-
 
     inner class ViewHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView)  {

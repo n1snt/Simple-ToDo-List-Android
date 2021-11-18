@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.tasksList
+package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList
 
 data class TaskDC(
 
