@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList
+package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -27,14 +27,14 @@ class ToDoAdapter(private val todoList: MutableList<ToDo>, private val todoDao: 
 
     private var context: Context? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.recycler_view_todo_task , parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ToDoAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val taskOptionsView = holder.itemView.findViewById<ExpandableLayout>(R.id.taskOptions)
         holder.itemView.setOnClickListener {

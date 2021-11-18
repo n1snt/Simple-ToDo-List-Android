@@ -18,7 +18,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nishant.dev.todolist.R
-import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList.ToDoAdapter
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 

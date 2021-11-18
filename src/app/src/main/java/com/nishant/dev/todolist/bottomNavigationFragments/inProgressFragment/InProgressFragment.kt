@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.nishant.dev.todolist.R
-import com.nishant.dev.todolist.bottomNavigationFragments.inProgressFragment.inProgressList.inProgressAdapter
-import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList.ToDoAdapter
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import com.nishant.dev.todolist.database.ToDoDatabase

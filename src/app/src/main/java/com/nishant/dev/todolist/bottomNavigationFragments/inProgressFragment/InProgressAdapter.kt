@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.inProgressFragment.inProgressList
+package com.nishant.dev.todolist.bottomNavigationFragments.inProgressFragment
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nishant.dev.todolist.R
-import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.todoList.ToDoAdapter
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
