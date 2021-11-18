@@ -24,15 +24,12 @@
 
     <TextView
         android:id="@+id/taskTitle"
-        android:paddingStart="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
-        android:layout_marginStart="-20dp"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/taskOptions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toEndOf="@id/moveToInProgressButton"
         app:layout_constraintTop_toTopOf="parent" />
 

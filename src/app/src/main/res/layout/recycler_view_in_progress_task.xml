@@ -13,16 +13,14 @@
         android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/taskOptions"
+        app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/taskTitle"
-        android:paddingStart="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
-        android:layout_marginStart="-20dp"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +45,7 @@
             android:text="Task description here."
             android:paddingHorizontal="30dp"
             android:elevation="4dp"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content" />
 
         <LinearLayout
