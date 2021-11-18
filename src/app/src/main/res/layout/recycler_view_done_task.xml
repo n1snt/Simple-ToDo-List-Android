@@ -56,7 +56,6 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/moveToTodoButton"
                 android:layout_width="100dp"
@@ -64,7 +63,7 @@
                 android:layout_margin="10dp"
                 android:textAllCaps="true"
                 app:backgroundTint="@color/white"
-                app:icon="@drawable/ic_outline_undo_24"
+                app:icon="@drawable/ic_outline_done_24"
                 app:iconGravity="top"
                 android:textColor="@color/black"
                 app:iconTint="@color/black"
@@ -72,7 +71,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="Move to todo"
+                android:contentDescription="Move to in progress."
                 android:text="Move" />
 
             <com.google.android.material.button.MaterialButton

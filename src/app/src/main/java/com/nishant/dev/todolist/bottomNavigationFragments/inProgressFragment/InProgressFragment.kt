@@ -17,7 +17,7 @@ import com.nishant.dev.todolist.database.ToDoDatabase
 class InProgressFragment(val dbDao: ToDoDao): Fragment() {
 
     private var dbInstance: ToDoDatabase? = null
-    private lateinit var todoDao: ToDoDao
+    private var todoDao = dbDao
     var inProgressList: MutableList<ToDo>? = null
     lateinit var inProgressAdapter: inProgressAdapter
 
@@ -27,17 +27,6 @@ class InProgressFragment(val dbDao: ToDoDao): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val inf =  inflater.inflate(R.layout.fragment_in_progress, container, false)
-
-        // Setup database instance.
-        dbInstance =
-            context?.let {
-                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
-                    .allowMainThreadQueries()
-                    .build()
-            }
-
-        // Get DAO.
-        todoDao = dbInstance?.todoDao()!!
 
         inProgressList = todoDao.getInProgressTasks()
         Log.d("DoneTasks", inProgressList.toString())
