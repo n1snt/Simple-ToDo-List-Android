@@ -67,4 +67,8 @@ dependencies {
 
     // Lib for expandable recyclerview items.
     implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
+
+    // Lib for long press shortcuts.
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation 'androidx.core:core-google-shortcuts:1.0.0'
 }
