@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
         val todoShortcut = ShortcutInfoCompat.Builder(this, "todoShortcut")
             .setShortLabel("Todo")
             .setLongLabel("Open todo tasks list.")
-            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_outline_undo_24_black))
             .setIntent(
                 Intent(this, MainActivity::class.java).setAction("todo")
             )
@@ -98,7 +97,6 @@ class MainActivity : AppCompatActivity() {
         val inProgressShortcut = ShortcutInfoCompat.Builder(this, "inProgressShortcut")
             .setShortLabel("In Progress")
             .setLongLabel("Open in progress tasks.")
-            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_outline_undo_24_black))
             .setIntent(
                 Intent(this, MainActivity::class.java).setAction("in progress")
             )
@@ -107,7 +105,6 @@ class MainActivity : AppCompatActivity() {
         val doneShortcut = ShortcutInfoCompat.Builder(this, "doneShortcut")
             .setShortLabel("Done")
             .setLongLabel("Open completed tasks.")
-            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_outline_undo_24_black))
             .setIntent(
                 Intent(this, MainActivity::class.java).setAction("done")
             )
