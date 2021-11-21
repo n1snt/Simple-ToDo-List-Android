@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nishant.dev.todolist.bottomNavigationFragments.doneFragment.DoneFragment
+import com.nishant.dev.todolist.bottomNavigationFragments.archivedFragment.ArchivedFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.TodoFragment
 import com.nishant.dev.todolist.database.ToDoDatabase
 
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         // Get DAO.
         val todoDao = dbInstance.todoDao()
 
-        val doneFragment = DoneFragment(todoDao)
+        val doneFragment = ArchivedFragment(todoDao)
         val todoFragment = TodoFragment(todoDao)
 
         // Set listener for bottom nav bar.
@@ -107,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun longPressShortcutListener(
-        doneFragment: DoneFragment,
+        archivedFragment: ArchivedFragment,
         todoFragment: TodoFragment,
         navBar: BottomNavigationView
     ) {
@@ -134,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title = "Done"
 
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.bottom_nav_fragment_container, doneFragment)
+                        .replace(R.id.bottom_nav_fragment_container, archivedFragment)
                         .commit()
 
                     navBar.selectedItemId = R.id.archived_bottom_nav

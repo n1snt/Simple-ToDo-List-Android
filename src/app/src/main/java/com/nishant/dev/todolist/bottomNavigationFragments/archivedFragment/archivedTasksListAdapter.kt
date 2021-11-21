@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.doneFragment
+package com.nishant.dev.todolist.bottomNavigationFragments.archivedFragment
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,15 +11,15 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class doneTasksListAdapter(private val doneList: MutableList<ToDo>, private val todoDao: ToDoDao):
-    RecyclerView.Adapter<doneTasksListAdapter.ViewHolder>() {
+class archivedTasksListAdapter(private val doneList: MutableList<ToDo>, private val todoDao: ToDoDao):
+    RecyclerView.Adapter<archivedTasksListAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): doneTasksListAdapter.ViewHolder {
+    ): archivedTasksListAdapter.ViewHolder {
 
         context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
@@ -27,7 +27,7 @@ class doneTasksListAdapter(private val doneList: MutableList<ToDo>, private val 
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: doneTasksListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: archivedTasksListAdapter.ViewHolder, position: Int) {
 
         val taskOptionsView = holder.itemView.findViewById<ExpandableLayout>(R.id.inProgressTaskOptions)
         holder.itemView.setOnClickListener {
