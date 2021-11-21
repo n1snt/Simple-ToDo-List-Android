@@ -6,16 +6,6 @@
     android:background="@drawable/todo_recycler_view_bg"
     android:layout_height="wrap_content">
 
-    <CheckBox
-        android:id="@+id/markAsDoneCheckbox"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/taskTitle"
         android:layout_width="300dp"
@@ -24,8 +14,7 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
-        app:layout_constraintStart_toEndOf="@id/markAsDoneCheckbox"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <net.cachapa.expandablelayout.ExpandableLayout

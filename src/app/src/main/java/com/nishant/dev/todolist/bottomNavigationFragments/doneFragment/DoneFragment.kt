@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.nishant.dev.todolist.R
-import com.nishant.dev.todolist.bottomNavigationFragments.inProgressFragment.inProgressAdapter
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
-import com.nishant.dev.todolist.database.ToDoDatabase
 
 class DoneFragment(dbDao: ToDoDao) : Fragment() {
 
@@ -29,7 +27,7 @@ class DoneFragment(dbDao: ToDoDao) : Fragment() {
     ): View? {
         val inf =  inflater.inflate(R.layout.fragment_done, container, false)
 
-        doneList = dbDao.getDoneTasks()
+        doneList = dbDao.getArchivedTasks()
         Log.d("DoneTasks", doneList.toString())
 
         // Send data to recyclerview adapter.

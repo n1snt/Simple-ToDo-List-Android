@@ -64,7 +64,7 @@
                 android:layout_margin="10dp"
                 android:textAllCaps="true"
                 app:backgroundTint="@color/white"
-                app:icon="@drawable/ic_outline_undo_24"
+                app:icon="@drawable/ic_outline_archive_24"
                 app:iconGravity="top"
                 android:textColor="@color/black"
                 app:iconTint="@color/black"
@@ -72,11 +72,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="Move to todo"
-                android:text="Move" />
+                android:contentDescription="Move to archived."
+                android:text="Archive" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/TodoEditTask"
+                android:id="@+id/inProgressEditTask"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -93,7 +93,7 @@
                 android:text="Edit" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/TodoDeleteTask"
+                android:id="@+id/inProgressDeleteTask"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

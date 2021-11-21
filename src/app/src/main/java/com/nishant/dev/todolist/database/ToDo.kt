@@ -14,12 +14,9 @@ data class ToDo(
     @ColumnInfo(name = "task_title") var task_title: String?,
     @ColumnInfo(name = "task_description") var task_description: String?,
 
-    // Is task marked as done?
-    @ColumnInfo(name="task_done") val task_done: Boolean = false,
+    // Is task done?
+    @ColumnInfo(name="done") var done: Boolean = false,
 
-    // Is task moved to doing?
-    @ColumnInfo(name="task_in_doing") var task_in_doing: Boolean = false,
-
-    // Is task moved to done?
-    @ColumnInfo(name="task_in_done") val task_in_done: Boolean = false,
+    // Is task archived?
+    @ColumnInfo(name="archived") var archived: Boolean = false,
 )

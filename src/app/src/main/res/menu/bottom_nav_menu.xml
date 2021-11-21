@@ -4,16 +4,11 @@
     <item
         android:id="@+id/todo_bottom_nav"
         android:title="ToDo"
-        android:icon="@drawable/ic_outline_done_24"/>
+        android:icon="@drawable/ic_baseline_checklist_24"/>
 
     <item
-        android:id="@+id/in_progress_bottom_nav"
-        android:title="In Progress"
-        android:icon="@drawable/ic_outline_doing_24"/>
-
-    <item
-        android:id="@+id/done_bottom_nav"
-        android:title="Done"
-        android:icon="@drawable/ic_baseline_done_all_24"/>
+        android:id="@+id/archived_bottom_nav"
+        android:title="Archived"
+        android:icon="@drawable/ic_outline_archive_24"/>
 
 </menu>
