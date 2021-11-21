@@ -21,13 +21,9 @@ import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 
-class TodoFragment(dbDao: ToDoDao): Fragment() {
-
-    // Get dao to access database.
-    val dbDao = dbDao
+class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
     lateinit var todoAdapter: ToDoAdapter
-
     var todoList: MutableList<ToDo>? = null
 
     override fun onCreateView(

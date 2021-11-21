@@ -11,23 +11,23 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class archivedTasksListAdapter(private val doneList: MutableList<ToDo>, private val todoDao: ToDoDao):
-    RecyclerView.Adapter<archivedTasksListAdapter.ViewHolder>() {
+class ArchivedTasksListAdapter(private val archivedList: MutableList<ToDo>, private val todoDao: ToDoDao):
+    RecyclerView.Adapter<ArchivedTasksListAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): archivedTasksListAdapter.ViewHolder {
+    ): ArchivedTasksListAdapter.ViewHolder {
 
         context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recycler_view_done_task , parent, false)
+            R.layout.recycler_view_archived_task , parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: archivedTasksListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArchivedTasksListAdapter.ViewHolder, position: Int) {
 
         val taskOptionsView = holder.itemView.findViewById<ExpandableLayout>(R.id.inProgressTaskOptions)
         holder.itemView.setOnClickListener {
@@ -38,7 +38,7 @@ class archivedTasksListAdapter(private val doneList: MutableList<ToDo>, private 
     }
 
     override fun getItemCount(): Int {
-        return doneList.size
+        return archivedList.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
@@ -46,7 +46,7 @@ class archivedTasksListAdapter(private val doneList: MutableList<ToDo>, private 
         fun bind() {
             // Write code here.
 
-            val data = doneList[adapterPosition]
+            val data = archivedList[adapterPosition]
 
             // Set Title.
             val taskTitle = itemView.findViewById<TextView>(R.id.taskTitle)
