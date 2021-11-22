@@ -110,25 +110,13 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
             dbDao.addTask(testing)
 
             // Add to the db list above.
-            todoList?.add(testing)
+            todoList?.add(0, testing)
 
             // This is testing stuff to retrieve data from database.
             //val todoList: List<ToDo>? = todoDao?.getTasks()
             //val doneTasks: List<ToDo>? = todoDao?.getDoneTasks()
 
-            /*
-            This is a patch to fix tasks not appearing properly in recyclerview
-            when there are no tasks in recyclerview.
-            */
-            if (todoList?.size!! == 0) {
-                todoAdapter.notifyItemInserted(0)
-            }
-            else {
-                todoList?.size?.minus(1)?.let {
-                    todoAdapter.notifyItemInserted(it)
-                }
-            }
-
+            todoAdapter.notifyItemInserted(0)
         }
         else if (!txtViewsValid) {
             // Do not add and disable button.

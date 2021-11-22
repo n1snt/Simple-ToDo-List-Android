@@ -1,5 +1,6 @@
 package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
 import android.graphics.Paint
-import android.util.Log
 
 
 class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
@@ -45,6 +45,7 @@ class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val tod
     inner class ViewHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView)  {
 
+        @SuppressLint("NotifyDataSetChanged")
         fun bind() {
 
             val data = inProgressList[adapterPosition]
@@ -74,6 +75,16 @@ class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val tod
 
                 // Strikethrough title.
                 if (b) {
+
+                    // Add task to end of list.
+                    inProgressList.add(inProgressList.size, data)
+
+                    // Remove the old item from list.
+                    inProgressList.removeAt(adapterPosition)
+
+                    // Add to end.
+                    notifyItemMoved(adapterPosition, inProgressList.size-1)
+
                     taskTitle.paintFlags = taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 else {
@@ -85,8 +96,6 @@ class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val tod
 
                 // Push changes to db using dao.
                 todoDao.updateTask(data)
-
-                Log.d("B", b.toString())
             }
 
             // Set listener for edit button.

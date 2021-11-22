@@ -9,7 +9,7 @@ interface ToDoDao {
     @Insert
     fun addTask(todo: ToDo)
 
-    @Query("SELECT * FROM todo WHERE archived LIKE 0 ORDER BY rowid DESC, done LIKE 0 ASC")
+    @Query("SELECT * FROM todo WHERE archived IS 0 ORDER BY done ASC, rowid ASC")
     fun getTasks(): MutableList<ToDo>
 
     @Query("SELECT * FROM todo WHERE archived IS 1 ORDER BY rowid DESC")

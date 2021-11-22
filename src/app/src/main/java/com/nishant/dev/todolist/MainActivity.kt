@@ -14,11 +14,9 @@ import com.nishant.dev.todolist.database.ToDoDatabase
 
 class MainActivity : AppCompatActivity() {
 
-    private var defaultFragment = "in progress"
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        supportActionBar?.title = "Todo"
+        supportActionBar?.title = "ToDo"
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     setFragment(doneFragment)
                 }
                 R.id.todo_bottom_nav -> {
-                    supportActionBar?.title = "Todo"
+                    supportActionBar?.title = "ToDo"
                     setFragment(todoFragment)
                 }
                 else -> false
@@ -117,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 "todo" -> {
 
                     // Set title.
-                    supportActionBar?.title = "Todo"
+                    supportActionBar?.title = "ToDo"
 
                     // Set fragment.
                     supportFragmentManager.beginTransaction()
