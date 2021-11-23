@@ -14,9 +14,10 @@ import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
 import android.graphics.Paint
+import android.util.Log
 
 
-class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
+class ToDoAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
     RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
     private var context: Context? = null
@@ -73,6 +74,12 @@ class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val tod
             // Set listener for checkbox.
             taskCheckbox.setOnCheckedChangeListener { compoundButton, b ->
 
+                // Change in data.
+                data.done = b
+
+                // Push changes to db using dao.
+                todoDao.updateTask(data)
+
                 // Strikethrough title.
                 if (b) {
 
@@ -88,14 +95,34 @@ class ToDoAdapter(private val inProgressList: MutableList<ToDo>, private val tod
                     taskTitle.paintFlags = taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 else {
+
+                    // Get location from db.
+                    val tasksList = todoDao.getTasks()
+                    var indexOfItem: Int = 0
+                    tasksList.forEach { it ->
+                        Log.d("Lol", it.toString())
+
+                        if (it.id == data.id) {
+
+                            // Move item to the it.id index.
+
+                            // Add task to end of list.
+                            inProgressList.add(indexOfItem, data)
+
+                            // Remove the old item from list.
+                            inProgressList.removeAt(adapterPosition)
+
+                            // Add to end.
+                            notifyItemMoved(adapterPosition, indexOfItem)
+
+                        }
+
+                        indexOfItem += 1
+                    }
+
                     taskTitle.paintFlags = taskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
 
-                // Change in data.
-                data.done = b
-
-                // Push changes to db using dao.
-                todoDao.updateTask(data)
             }
 
             // Set listener for edit button.
