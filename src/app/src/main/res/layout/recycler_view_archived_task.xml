@@ -46,13 +46,13 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/moveToTodoButton"
+                android:id="@+id/unArchive"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textAllCaps="true"
                 app:backgroundTint="@color/white"
-                app:icon="@drawable/ic_outline_archive_24"
+                app:icon="@drawable/ic_outline_unarchive_24"
                 app:iconGravity="top"
                 android:textColor="@color/black"
                 app:iconTint="@color/black"

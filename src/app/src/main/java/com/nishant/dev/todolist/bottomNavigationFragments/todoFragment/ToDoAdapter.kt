@@ -15,6 +15,11 @@ import com.nishant.dev.todolist.database.ToDoDao
 import net.cachapa.expandablelayout.ExpandableLayout
 import android.graphics.Paint
 import android.util.Log
+import android.widget.EditText
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.customview.customView
 
 
 class ToDoAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
@@ -129,20 +134,75 @@ class ToDoAdapter(private var inProgressList: MutableList<ToDo>, private val tod
             val editButton = itemView.findViewById<MaterialButton>(R.id.inProgressEditTask)
             editButton.setOnClickListener {
 
+                // Open bottom sheet.
+                // Save changes to db.
+                context?.let { it1 ->
+                    MaterialDialog(it1, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+
+                        // Set custom view.
+                        customView(R.layout.fragment_task_dialog, horizontalPadding = true)
+
+                        // Set title in the custom view.
+                        findViewById<TextView>(R.id.fragmentTaskTitle).text = "Edit task"
+
+                        // Set task title and description from DB to edit.
+                        val taskTitleEditTxt = findViewById<EditText>(R.id.add_task_dialog_title)
+                        taskTitleEditTxt.setText(data.task_title)
+                        val taskDescEditTxt = findViewById<EditText>(R.id.add_task_dialog_task_description)
+                        taskDescEditTxt.setText(data.task_description)
+
+                        negativeButton(text="Cancel")
+                        positiveButton(text="Edit") { dialog ->
+
+                            // Get edited text from edittext.
+                            Log.d("Title text", taskTitleEditTxt.text.toString())
+                            Log.d("Desc text", taskDescEditTxt.text.toString())
+
+                            // Change in list.
+                            data.task_title = taskTitleEditTxt.text.toString()
+                            data.task_description = taskDescEditTxt.text.toString()
+
+                            // Change in DB.
+                            todoDao.updateTask(data)
+
+                            // Notify plox.
+                            notifyItemChanged(adapterPosition)
+                        }
+                    }
+                }
+
             }
 
             // Set listener for move button.
             val moveButton = itemView.findViewById<MaterialButton>(R.id.moveToTodoButton)
             moveButton.setOnClickListener {
 
+                // Update value in list.
+                data.archived = true
+
+                // Set value in database.
+                todoDao.updateTask(data)
+
+                // Remove item from list.
+                inProgressList.removeAt(adapterPosition)
+
+                // NotifyItemMoved.
+                notifyItemRemoved(adapterPosition)
             }
 
             // Set listener for delete button.
             val deleteButton = itemView.findViewById<MaterialButton>(R.id.inProgressDeleteTask)
             deleteButton.setOnClickListener {
 
-            }
+                // Delete from database.
+                todoDao.deleteTask(data)
 
+                // Remove from list.
+                inProgressList.removeAt(adapterPosition)
+
+                // NotifyItemDeleted.
+                notifyItemRemoved(adapterPosition)
+            }
         }
     }
 }
