@@ -44,7 +44,6 @@ class ArchivedTasksListAdapter(private val archivedList: MutableList<ToDo>, priv
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
         fun bind() {
-            // Write code here.
 
             val data = archivedList[adapterPosition]
 
@@ -55,6 +54,12 @@ class ArchivedTasksListAdapter(private val archivedList: MutableList<ToDo>, priv
             // Set task description.
             val taskDescription = itemView.findViewById<TextView>(R.id.TodoTaskDescription)
             taskDescription.text = data.task_description
+
+            // Onlick listener for unarchive.
+
+            // Listener for delete.
+
+            // Listener for edit.
 
         }
     }

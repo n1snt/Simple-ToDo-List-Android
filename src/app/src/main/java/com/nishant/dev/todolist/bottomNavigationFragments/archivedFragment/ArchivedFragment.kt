@@ -17,6 +17,8 @@ class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
     var archivedList: MutableList<ToDo>? = null
     lateinit var archivedAdapter: ArchivedTasksListAdapter
 
+    var args = Bundle()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

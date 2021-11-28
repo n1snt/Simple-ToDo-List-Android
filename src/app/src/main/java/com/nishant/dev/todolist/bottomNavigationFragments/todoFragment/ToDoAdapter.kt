@@ -124,7 +124,6 @@ class ToDoAdapter(private var inProgressList: MutableList<ToDo>, private val tod
 
                         indexOfItem += 1
                     }
-
                     taskTitle.paintFlags = taskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
 
