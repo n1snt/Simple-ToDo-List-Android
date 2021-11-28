@@ -14,6 +14,6 @@
     <color name="backgroundColor">#000000</color>
     <color name="backgroundColorLight">#FFFFFF</color>
 
-    <color name="surfaceColor">#101010</color>
+    <color name="surfaceColor">#181818</color>
     <color name="surfaceColorLight">#F4F4F4</color>
 </resources>
