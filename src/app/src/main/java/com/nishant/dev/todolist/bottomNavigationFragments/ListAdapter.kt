@@ -183,7 +183,7 @@ class ListAdapter(private var inProgressList: MutableList<ToDo>, private val tod
             moveButton.setOnClickListener {
 
                 // Update value in list.
-                data.archived = true
+                data.archived = !data.archived
 
                 // Set value in database.
                 todoDao.updateTask(data)
