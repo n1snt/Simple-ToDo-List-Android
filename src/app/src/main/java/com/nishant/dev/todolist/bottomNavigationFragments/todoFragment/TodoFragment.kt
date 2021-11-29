@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputLayout
 import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
@@ -31,6 +31,7 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val inf =  inflater.inflate(R.layout.fragment_todo, container, false)
 
         // Get add task button.
@@ -44,8 +45,8 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
                     negativeButton(text="Cancel")
                     positiveButton(text="Add") { dialog ->
 
-                        val titleText = dialog.getCustomView().findViewById<EditText>(R.id.add_task_dialog_title)
-                        val descriptionText = dialog.getCustomView().findViewById<EditText>(R.id.add_task_dialog_task_description)
+                        val titleText = dialog.getCustomView().findViewById<TextInputLayout>(R.id.add_task_dialog_title)
+                        val descriptionText = dialog.getCustomView().findViewById<TextInputLayout>(R.id.add_task_dialog_task_description)
                         addTask(titleText, descriptionText)
                     }
                 }
@@ -67,10 +68,10 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
         return inf
     }
 
-    private fun validateTextViews(title: EditText): Boolean {
+    private fun validateTextViews(title: TextInputLayout): Boolean {
 
         // Get content of both the textviews.
-        val titleText = title.text.isNullOrBlank()
+        val titleText = title.editText?.text.isNullOrBlank()
         Log.d("testsd", titleText.toString())
 
         // Check if title is empty.
@@ -88,7 +89,7 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addTask(titleTask: EditText, descriptionTask: EditText) {
+    fun addTask(titleTask: TextInputLayout, descriptionTask: TextInputLayout) {
 
         // Validate title of task.
         val txtViewsValid = validateTextViews(titleTask)
@@ -102,8 +103,8 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
             // Setup data to save in DB.
             val testing = ToDo(
                 id=null,
-                task_title = titleTask.text.toString(),
-                task_description = descriptionTask.text.toString(),
+                task_title = titleTask.editText?.text.toString(),
+                task_description = descriptionTask.editText?.text.toString(),
             )
 
             // Add data to database.
@@ -111,10 +112,6 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
             // Add to the db list above.
             todoList?.add(0, testing)
-
-            // This is testing stuff to retrieve data from database.
-            //val todoList: List<ToDo>? = todoDao?.getTasks()
-            //val doneTasks: List<ToDo>? = todoDao?.getDoneTasks()
 
             todoAdapter.notifyItemInserted(0)
         }

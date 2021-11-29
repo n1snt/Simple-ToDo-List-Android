@@ -6,17 +6,20 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/backgroundColorLight</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="colorOnSecondary">@color/backgroundColorLight</item>
+
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/backgroundColorLight</item>
         <item name="colorSurface">@color/surfaceColorLight</item>
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
+
+        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Surface</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
 
-        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Surface</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
     </style>
 </resources>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/fragmentTaskTitle"
@@ -15,22 +14,34 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_task_dialog_title"
         android:hint="Title"
         android:inputType="text"
-        android:padding="20dp"
+        app:boxBackgroundColor="?attr/colorSurface"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_task_dialog_task_description"
         android:hint="Description"
         android:inputType="text"
-        android:padding="20dp"
+        app:boxBackgroundColor="?attr/colorSurface"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+</com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
