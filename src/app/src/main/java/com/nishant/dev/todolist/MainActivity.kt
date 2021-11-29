@@ -7,6 +7,9 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.room.Room
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nishant.dev.todolist.bottomNavigationFragments.ArchivedFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.TodoFragment
@@ -62,9 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         setLongPressShortcuts()
-
     }
 
     private fun setFragment(fragment: Fragment): Boolean {
@@ -79,8 +80,8 @@ class MainActivity : AppCompatActivity() {
     private fun setLongPressShortcuts() {
 
         val inProgressShortcut = ShortcutInfoCompat.Builder(this, "inProgressShortcut")
-            .setShortLabel("Todo")
-            .setLongLabel("Open in progress tasks.")
+            .setShortLabel("ToDo")
+            .setLongLabel("Open todo.")
             .setIntent(
                 Intent(this, MainActivity::class.java).setAction("in progress")
             )
@@ -93,7 +94,6 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, MainActivity::class.java).setAction("done")
             )
             .build()
-
 
         val listTest :MutableList<ShortcutInfoCompat> = ArrayList()
         listTest.add(inProgressShortcut)
@@ -137,7 +137,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
-
 }

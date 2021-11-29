@@ -22,15 +22,21 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 
 
-class ToDoListAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
-    RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
+class ListAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao, val todoAdapter: Boolean):
+    RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
+
+        var adapterLayout = R.layout.recycler_view_archived_task
+        if (todoAdapter) {
+            adapterLayout = R.layout.recycler_view_todo_task
+        }
+
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recycler_view_todo_task , parent, false)
+            adapterLayout , parent, false)
         return ViewHolder(view)
     }
 

@@ -6,6 +6,16 @@
     android:background="@drawable/todo_recycler_view_bg"
     android:layout_height="wrap_content">
 
+    <CheckBox
+        android:id="@+id/markAsDoneCheckbox"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/taskTitle"
         android:layout_width="300dp"
@@ -14,7 +24,8 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/inProgressTaskOptions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toEndOf="@id/markAsDoneCheckbox"
         app:layout_constraintTop_toTopOf="parent" />
 
     <net.cachapa.expandablelayout.ExpandableLayout
@@ -37,59 +48,67 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorSurface"/>
+
         <LinearLayout
             android:layout_width="fill_parent"
-            android:paddingTop="30dp"
-            android:paddingBottom="17dp"
+            android:paddingTop="20dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/unArchive"
-                android:layout_width="100dp"
+                android:id="@+id/moveToTodoButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textAllCaps="true"
                 app:icon="@drawable/ic_outline_unarchive_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="Move back to todo."
-                android:textSize="10dp"
-                android:paddingVertical="7dp"
+                android:contentDescription="Unarchive."
+                app:iconTint="?attr/colorOnSurface"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp"
                 android:text="Unarchive" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/TodoEditTask"
-                android:layout_width="100dp"
+                android:id="@+id/inProgressEditTask"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textAllCaps="true"
                 app:icon="@drawable/ic_outline_edit_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/moveToTodoButton"
+                app:iconTint="?attr/colorOnSurface"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp"
                 android:text="Edit" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/TodoDeleteTask"
-                android:layout_width="100dp"
+                android:id="@+id/inProgressDeleteTask"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textAllCaps="true"
                 app:icon="@drawable/ic_baseline_delete_outline_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
                 app:iconTint="#FF6F6F"
                 android:textColor="#FF6F6F"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/TodoEditTask"
+                app:layout_constraintStart_toStartOf="@id/inProgressEditTask"
+                android:textSize="11sp"
+                android:layout_marginVertical="10dp"
                 android:text="Delete" />
 
         </LinearLayout>

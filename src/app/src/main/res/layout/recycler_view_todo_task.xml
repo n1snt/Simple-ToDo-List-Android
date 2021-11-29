@@ -106,7 +106,7 @@
                 android:textColor="#FF6F6F"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/TodoEditTask"
+                app:layout_constraintStart_toStartOf="@id/inProgressEditTask"
                 android:textSize="11sp"
                 android:layout_marginVertical="10dp"
                 android:text="Delete" />

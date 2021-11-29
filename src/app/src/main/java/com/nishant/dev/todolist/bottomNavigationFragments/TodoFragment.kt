@@ -23,7 +23,7 @@ import com.nishant.dev.todolist.database.ToDoDao
 
 class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
-    lateinit var todoListAdapter: ToDoListAdapter
+    lateinit var todoListAdapter: ListAdapter
     var todoList: MutableList<ToDo>? = null
 
     override fun onCreateView(
@@ -60,7 +60,7 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
         Log.d("List",todoList.toString())
 
-        todoListAdapter = ToDoListAdapter(todoList!!, dbDao)
+        todoListAdapter = ListAdapter(todoList!!, dbDao, true)
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
         tasksRecyclerView.adapter = todoListAdapter

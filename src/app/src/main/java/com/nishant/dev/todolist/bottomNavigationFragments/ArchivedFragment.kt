@@ -15,7 +15,7 @@ import com.nishant.dev.todolist.database.ToDoDao
 class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
 
     var archivedList: MutableList<ToDo>? = null
-    private lateinit var archivedAdapter: ToDoListAdapter
+    private lateinit var archivedAdapter: ListAdapter
 
     var args = Bundle()
 
@@ -32,7 +32,7 @@ class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
         // Send data to recyclerview adapter.
         val tasksRecyclerView = inf.findViewById<RecyclerView>(R.id.todoRecyclerView)
 
-        archivedAdapter = ToDoListAdapter(archivedList!!, dbDao)
+        archivedAdapter = ListAdapter(archivedList!!, dbDao, false)
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
         tasksRecyclerView.adapter = archivedAdapter
