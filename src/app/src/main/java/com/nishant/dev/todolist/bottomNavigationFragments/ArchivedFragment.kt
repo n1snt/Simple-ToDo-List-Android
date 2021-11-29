@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.archivedFragment
+package com.nishant.dev.todolist.bottomNavigationFragments
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,7 @@ import com.nishant.dev.todolist.database.ToDoDao
 class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
 
     var archivedList: MutableList<ToDo>? = null
-    lateinit var archivedAdapter: ArchivedTasksListAdapter
+    private lateinit var archivedAdapter: ToDoListAdapter
 
     var args = Bundle()
 
@@ -30,9 +30,9 @@ class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
         Log.d("DoneTasks", archivedList.toString())
 
         // Send data to recyclerview adapter.
-        val tasksRecyclerView = inf.findViewById<RecyclerView>(R.id.doneRecyclerView)
+        val tasksRecyclerView = inf.findViewById<RecyclerView>(R.id.todoRecyclerView)
 
-        archivedAdapter = ArchivedTasksListAdapter(archivedList!!, dbDao)
+        archivedAdapter = ToDoListAdapter(archivedList!!, dbDao)
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
         tasksRecyclerView.adapter = archivedAdapter

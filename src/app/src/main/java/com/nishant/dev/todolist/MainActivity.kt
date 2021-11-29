@@ -8,8 +8,8 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nishant.dev.todolist.bottomNavigationFragments.archivedFragment.ArchivedFragment
-import com.nishant.dev.todolist.bottomNavigationFragments.todoFragment.TodoFragment
+import com.nishant.dev.todolist.bottomNavigationFragments.ArchivedFragment
+import com.nishant.dev.todolist.bottomNavigationFragments.TodoFragment
 import com.nishant.dev.todolist.database.ToDoDatabase
 
 class MainActivity : AppCompatActivity() {

@@ -48,52 +48,67 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorSurface"/>
+
         <LinearLayout
             android:layout_width="fill_parent"
-            android:paddingTop="30dp"
-            android:paddingBottom="17dp"
+            android:paddingTop="20dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/moveToTodoButton"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 app:icon="@drawable/ic_outline_archive_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="Move to archived."
+                app:iconTint="?attr/colorOnSurface"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp"
                 android:text="Archive" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/inProgressEditTask"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 app:icon="@drawable/ic_outline_edit_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/moveToTodoButton"
+                app:iconTint="?attr/colorOnSurface"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp"
                 android:text="Edit" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/inProgressDeleteTask"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 app:icon="@drawable/ic_baseline_delete_outline_24"
                 app:iconGravity="top"
-                app:iconPadding="5dp"
+                android:background="@android:color/transparent"
+                app:iconTint="#FF6F6F"
+                android:textColor="#FF6F6F"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/TodoEditTask"
+                android:textSize="11sp"
+                android:layout_marginVertical="10dp"
                 android:text="Delete" />
 
         </LinearLayout>

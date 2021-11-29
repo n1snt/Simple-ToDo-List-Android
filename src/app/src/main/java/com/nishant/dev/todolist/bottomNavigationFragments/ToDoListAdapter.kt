@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment
+package com.nishant.dev.todolist.bottomNavigationFragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,15 +22,15 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 
 
-class ToDoAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
-    RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
+class ToDoListAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao):
+    RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recycler_view_in_progress_task , parent, false)
+            R.layout.recycler_view_todo_task , parent, false)
         return ViewHolder(view)
     }
 

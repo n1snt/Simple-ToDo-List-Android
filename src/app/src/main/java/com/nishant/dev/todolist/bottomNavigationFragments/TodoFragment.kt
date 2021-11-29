@@ -1,4 +1,4 @@
-package com.nishant.dev.todolist.bottomNavigationFragments.todoFragment
+package com.nishant.dev.todolist.bottomNavigationFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -23,7 +23,7 @@ import com.nishant.dev.todolist.database.ToDoDao
 
 class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
-    lateinit var todoAdapter: ToDoAdapter
+    lateinit var todoListAdapter: ToDoListAdapter
     var todoList: MutableList<ToDo>? = null
 
     override fun onCreateView(
@@ -60,10 +60,10 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
 
         Log.d("List",todoList.toString())
 
-        todoAdapter = ToDoAdapter(todoList!!, dbDao)
+        todoListAdapter = ToDoListAdapter(todoList!!, dbDao)
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
-        tasksRecyclerView.adapter = todoAdapter
+        tasksRecyclerView.adapter = todoListAdapter
 
         return inf
     }
@@ -113,7 +113,7 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
             // Add to the db list above.
             todoList?.add(0, testing)
 
-            todoAdapter.notifyItemInserted(0)
+            todoListAdapter.notifyItemInserted(0)
         }
         else if (!txtViewsValid) {
             // Do not add and disable button.
