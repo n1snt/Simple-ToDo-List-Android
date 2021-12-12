@@ -19,10 +19,11 @@ jobs:
         build-root-directory: src/
         arguments: build
     - name: Upload APK
+      run: "mkdir -p releases"
       uses: actions/upload-artifact@v1
       with:
         name: apk
-        path: releases/app-release.apk
+        path: src/app/release/app-release.apk
 
   sign:
     name: Sign
