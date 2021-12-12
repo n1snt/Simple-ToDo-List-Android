@@ -18,29 +18,3 @@ jobs:
       with:
         build-root-directory: src/
         arguments: build
-
-  sign:
-    name: Sign
-    id: sign_app
-    needs: build
-    steps:
-      - uses: r0adkll/sign-android-release@v1
-      with:
-        releaseDirectory: src/app/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-  release:
-    name: Release
-    needs: sign
-    steps:
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GIT_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Release X"
-        files:
-          ${{sign.sign_app.outputs.signedReleaseFile}}
