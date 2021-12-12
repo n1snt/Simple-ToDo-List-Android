@@ -24,7 +24,7 @@ jobs:
     id: sign_app
     needs: build
     steps:
-      - uses: r0adkll/sign-android-release@v1
+    - uses: r0adkll/sign-android-release@v1
       with:
         releaseDirectory: src/app/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
