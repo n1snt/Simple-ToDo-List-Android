@@ -53,5 +53,5 @@ jobs:
         automatic_release_tag: "latest"
         prerelease: true
         title: "Release X"
-        files:
+        files: |
           ${{sign.sign_app.outputs.signedReleaseFile
