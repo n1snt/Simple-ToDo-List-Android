@@ -16,9 +16,11 @@ jobs:
         java-version: 11
 
     - name: Build Project
+      run: cd src
       run: .\src\gradlew.bat build
 
     - name: Build Release AAB
+      run: cd src
       run: .\src\gradlew.bat bundleRelease
 
   sign:
