@@ -8,22 +8,21 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-java@v1
       with:
         java-version: 11
-    - uses: gradle/gradle-build-action@v2
-      with:
-        build-root-directory: src/
-        arguments: build
-    - run: "mkdir -p releases"
-    - name: Upload APK
-      uses: actions/upload-artifact@v1
-      with:
-        name: apk
-        path: releases/app-release.apk
+
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
+
+    - name: Build Project
+      run: ./gradlew build
+
+    - name: Build Release AAB
+      run: ./gradlew bundleRelease
 
   sign:
     name: Sign
