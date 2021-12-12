@@ -23,7 +23,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: apk
-        path: src/app/release/app-release.apk
+        path: releases/app-release.apk
 
   sign:
     name: Sign
