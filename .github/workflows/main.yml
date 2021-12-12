@@ -18,8 +18,8 @@ jobs:
       with:
         build-root-directory: src/
         arguments: build
+    - run: "mkdir -p releases"
     - name: Upload APK
-      run: "mkdir -p releases"
       uses: actions/upload-artifact@v1
       with:
         name: apk
