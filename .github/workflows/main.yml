@@ -21,11 +21,11 @@ jobs:
 
   sign:
     name: Sign
-    id: sign_app
     needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: r0adkll/sign-android-release@v1
+      id: sign_app
       with:
         releaseDirectory: src/app/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
