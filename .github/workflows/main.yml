@@ -14,14 +14,15 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: 11
-
-    - name: Build Project
-      run: cd src
-      run: .\src\gradlew.bat build
-
-    - name: Build Release AAB
-      run: cd src
-      run: .\src\gradlew.bat bundleRelease
+    - uses: gradle/gradle-build-action@v2
+      with:
+        build-root-directory: src/
+        arguments: bundleRelease
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: apk
+        path: src\app\build\outputs\apk\release\app-release-unsigned.apk
 
   sign:
     name: Sign
