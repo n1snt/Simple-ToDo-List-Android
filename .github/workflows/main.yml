@@ -1,0 +1,44 @@
+name: Build Sign and Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - uses: gradle/gradle-build-action@v2
+      with:
+        build-root-directory: src/
+        arguments: build
+
+  sign:
+    name: Sign
+    id: sign_app
+    needs: build
+    uses: r0adkll/sign-android-release@v1
+    with:
+      releaseDirectory: src/app/release
+      signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+      alias: ${{ secrets.ALIAS }}
+      keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+      keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+  release:
+    name: Release
+    needs: sign
+    uses: "marvinpinto/action-automatic-releases@latest"
+    with:
+      repo_token: "${{ secrets.GIT_TOKEN }}"
+      automatic_release_tag: "latest"
+      prerelease: true
+      title: "Release X"
+      files:
+        ${{sign.sign_app.outputs.signedReleaseFile}}
