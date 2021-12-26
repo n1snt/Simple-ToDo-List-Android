@@ -27,10 +27,7 @@ jobs:
         path: src\app\build\outputs\apk\release\app-release-unsigned.apk
 
   sign:
-    name: Sign
-    id: sign
     needs: build
-    runs-on: ubuntu-latest
     steps:
     - name: Download APK from build
       uses: actions/download-artifact@v1
