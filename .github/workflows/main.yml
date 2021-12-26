@@ -41,13 +41,7 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-  release:
-    name: Release
-    needs: sign
-    steps:
-    - name: Upload signed apk.
-      uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v2
       with:
         name: Signed app bundle
-        path: ${{ jobs.sign.sign_app.outputs.signedReleaseFile }}
+        path: ${{ sign.sign_app.outputs.signedReleaseFile }}
