@@ -29,12 +29,15 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-    - name: Release
-      uses: "marvinpinto/action-automatic-releases@latest"
+    - uses: actions/upload-artifact@v2
       with:
-        repo_token: "${{ secrets.GIT_TOKEN }}"
-        automatic_release_tag: "latest"
+        name: app-release-signed.apk
+        path: src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
+
+    - name: Release
+      uses: "softprops/action-gh-release@v1"
+      with:
+        token: "${{ secrets.GIT_TOKEN }}"
         prerelease: true
         title: "Release"
-        files: |
-          src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
+        files: src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
