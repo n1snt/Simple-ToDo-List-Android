@@ -28,6 +28,7 @@ jobs:
 
   sign:
     name: Sign
+    id: sign
     needs: build
     runs-on: ubuntu-latest
     steps:
