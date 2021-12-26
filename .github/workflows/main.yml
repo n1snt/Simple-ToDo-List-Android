@@ -33,7 +33,6 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: apk
-
     - uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
