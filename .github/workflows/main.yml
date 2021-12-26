@@ -44,4 +44,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: Signed app bundle
-        path: ${{ sign.sign_app.outputs.signedReleaseFile }}
+        path: ${{ sign_app.outputs.signedReleaseFile }}
