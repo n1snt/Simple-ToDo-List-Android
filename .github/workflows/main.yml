@@ -20,7 +20,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./src/gradlew
       - name: build prod
-        run: cd src/ && ./gradlew bundleRelease
+        run: cd src/ && ./gradlew assembleRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
