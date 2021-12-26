@@ -45,6 +45,7 @@ jobs:
   release:
     name: Release
     needs: sign
+    steps:
     - name: Upload signed apk.
       uses: actions/upload-artifact@v2
       with:
