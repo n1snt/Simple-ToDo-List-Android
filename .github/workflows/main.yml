@@ -14,10 +14,12 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: 11
+
     - uses: gradle/gradle-build-action@v2
       with:
         build-root-directory: src/
         arguments: assembleRelease
+
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
@@ -33,6 +35,7 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: apk
+
     - uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
@@ -41,7 +44,8 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
+
     - uses: actions/upload-artifact@v2
       with:
         name: Signed app bundle
-        path: ${{ jobs.sign.sign_app.outputs.signedReleaseFile }}
+        path: ${{sign.sign_app.outputs.signedReleaseFile}}
