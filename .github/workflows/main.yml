@@ -36,4 +36,5 @@ jobs:
         automatic_release_tag: "latest"
         prerelease: true
         title: "Release"
-        files: src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
+        files: |
+          src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
