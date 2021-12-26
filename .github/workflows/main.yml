@@ -20,7 +20,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./src/gradlew
       - name: build prod
-        run: cd src/ && ./gradlew app:bundleRelease
+        run: cd src/ && ./gradlew bundleRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -29,4 +29,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build Artifacts
-          path: src/app/build/outputs
+          path: src/app/build
