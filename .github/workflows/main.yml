@@ -27,6 +27,7 @@ jobs:
         path: src\app\build\outputs\apk\release\app-release-unsigned.apk
 
   sign_apk:
+    runs-on: ubuntu-latest
     needs: build
     steps:
     - name: Download APK from build
