@@ -37,6 +37,7 @@ jobs:
     - name: Release
       uses: "softprops/action-gh-release@v1"
       with:
+        tag_name: latest
         token: "${{ secrets.GIT_TOKEN }}"
         generate_release_notes: true
         prerelease: false
