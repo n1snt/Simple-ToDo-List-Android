@@ -25,6 +25,22 @@ jobs:
       with:
         java-version: 11
 
+    - name: Update AndroidManifest.xml
+      uses: damienaicheh/update-android-version-manifest-action@v1.0.0
+      with:
+        android-manifest-path: 'src/app/src/main/AndroidManifest.xml'
+        version-code: ${{ env.NUMBER_OF_COMMITS }}
+        version-name: '${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}'
+        print-file: true
+
+    - name: Update gradle version for Android
+      uses: damienaicheh/update-android-version-gradle-action@v1.0.0
+      with:
+        build-gradle-path: 'src/build.gradle'
+        version-code: ${{ env.NUMBER_OF_COMMITS }}
+        version-name: '${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}'
+        print-file: true
+
     - name: Build app
       uses: gradle/gradle-build-action@v2
       with:
