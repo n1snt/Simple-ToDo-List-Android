@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -20,9 +21,11 @@ import com.google.android.material.textfield.TextInputLayout
 import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
+import com.nishant.dev.todolist.database.ToDoDatabase
 
-class TodoFragment(private val dbDao: ToDoDao): Fragment() {
+class TodoFragment(): Fragment() {
 
+    private lateinit var dbDao: ToDoDao
     lateinit var todoListAdapter: ListAdapter
     var todoList: MutableList<ToDo>? = null
 
@@ -33,6 +36,13 @@ class TodoFragment(private val dbDao: ToDoDao): Fragment() {
     ): View? {
 
         val inf =  inflater.inflate(R.layout.fragment_todo, container, false)
+
+        // Set dao.
+        dbDao = context?.let {
+            Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
+                .allowMainThreadQueries()
+                .build().todoDao()
+        }!!
 
         // Get add task button.
         val addTaskButton = inf.findViewById<FloatingActionButton>(R.id.add_task)

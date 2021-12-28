@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.nishant.dev.todolist.R
 import com.nishant.dev.todolist.database.ToDo
 import com.nishant.dev.todolist.database.ToDoDao
+import com.nishant.dev.todolist.database.ToDoDatabase
 
-class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
+class ArchivedFragment() : Fragment() {
 
-    var archivedList: MutableList<ToDo>? = null
+    private lateinit var dbDao: ToDoDao
+    private var archivedList: MutableList<ToDo>? = null
     private lateinit var archivedAdapter: ListAdapter
-
-    var args = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +26,13 @@ class ArchivedFragment(private val dbDao: ToDoDao) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val inf =  inflater.inflate(R.layout.fragment_archived, container, false)
+
+        // Set dao.
+        dbDao = context?.let {
+            Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
+                .allowMainThreadQueries()
+                .build().todoDao()
+        }!!
 
         archivedList = dbDao.getArchivedTasks()
         Log.d("DoneTasks", archivedList.toString())

@@ -24,19 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Setup database instance.
-        val dbInstance =
-            this.let {
-                Room.databaseBuilder(it, ToDoDatabase::class.java, "todo")
-                    .allowMainThreadQueries()
-                    .build()
-            }
-
-        // Get DAO.
-        val todoDao = dbInstance.todoDao()
-
-        val doneFragment = ArchivedFragment(todoDao)
-        val todoFragment = TodoFragment(todoDao)
+        val doneFragment = ArchivedFragment()
+        val todoFragment = TodoFragment()
 
         // Set listener for bottom nav bar.
         val navBar = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
