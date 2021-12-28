@@ -38,7 +38,6 @@ jobs:
       uses: "softprops/action-gh-release@v1"
       with:
         token: "${{ secrets.GIT_TOKEN }}"
-        tag_name: "latest"
-        prerelease: true
-        title: "Release"
+        generate_release_notes: true
+        prerelease: false
         files: src\app\build\outputs\apk\release\app-release-unsigned-signed.apk
