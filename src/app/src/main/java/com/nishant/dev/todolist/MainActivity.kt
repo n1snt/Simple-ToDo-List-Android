@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
@@ -24,30 +25,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val doneFragment = ArchivedFragment()
+        val archivedFragment = ArchivedFragment()
         val todoFragment = TodoFragment()
 
         // Set listener for bottom nav bar.
         val navBar = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
 
+        // Get active fragment from viewModel
+        val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        var activeFragment = viewModel.activeFragment
+
         // Initialize activity by setting the default launch fragment to
         // TodoFragment
         supportFragmentManager.beginTransaction()
-            .replace(R.id.bottom_nav_fragment_container, todoFragment)
+            .replace(R.id.bottom_nav_fragment_container, activeFragment)
             .commit()
 
-        navBar.selectedItemId = R.id.todo_bottom_nav
+        if (viewModel.activeFragment == archivedFragment) {
+            navBar.selectedItemId = R.id.archived_bottom_nav
+        }
+        else if (activeFragment == todoFragment) {
+            navBar.selectedItemId = R.id.todo_bottom_nav
+        }
 
-        longPressShortcutListener(doneFragment, todoFragment, navBar)
+        longPressShortcutListener(archivedFragment, todoFragment, navBar)
 
         navBar.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.archived_bottom_nav -> {
                     supportActionBar?.title = "Archived"
-                    setFragment(doneFragment)
+                    viewModel.activeFragmentSetter(archivedFragment)
+                    setFragment(archivedFragment)
                 }
                 R.id.todo_bottom_nav -> {
                     supportActionBar?.title = "ToDo"
+                    viewModel.activeFragmentSetter(todoFragment)
                     setFragment(todoFragment)
                 }
                 else -> false
