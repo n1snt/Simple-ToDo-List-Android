@@ -12,6 +12,7 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.elevation.SurfaceColors
 import com.nishant.dev.todolist.bottomNavigationFragments.ArchivedFragment
 import com.nishant.dev.todolist.bottomNavigationFragments.TodoFragment
 import com.nishant.dev.todolist.database.ToDoDatabase
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         supportActionBar?.title = "ToDo"
+        val color = SurfaceColors.SURFACE_2.getColor(this)
+        window.navigationBarColor = color
+        window.statusBarColor = color
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         // Get active fragment from viewModel
         val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        var activeFragment = viewModel.activeFragment
+        val activeFragment = viewModel.activeFragment
 
         // Initialize activity by setting the default launch fragment to
         // TodoFragment

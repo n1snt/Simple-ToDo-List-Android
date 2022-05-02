@@ -10,13 +10,9 @@
         <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
         <item name="colorOnSecondary">@color/backgroundColor</item>
 
-        <item name="android:colorBackground">@color/backgroundColor</item>
         <item name="colorSurface">@color/surfaceColor</item>
 
-        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Surface</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
         <item name="colorBackgroundFloating">?attr/colorSurface</item>
     </style>
 </resources>
