@@ -15,6 +15,6 @@
         <!-- Customize your theme here. -->
         <item name="colorSurface">@color/surfaceColorLight</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>
