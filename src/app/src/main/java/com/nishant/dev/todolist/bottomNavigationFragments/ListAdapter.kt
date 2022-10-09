@@ -20,6 +20,7 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
+import com.google.android.material.textfield.TextInputLayout
 
 
 class ListAdapter(private var inProgressList: MutableList<ToDo>, private val todoDao: ToDoDao, val todoAdapter: Boolean):
@@ -151,21 +152,21 @@ class ListAdapter(private var inProgressList: MutableList<ToDo>, private val tod
                         findViewById<TextView>(R.id.fragmentTaskTitle).text = "Edit task"
 
                         // Set task title and description from DB to edit.
-                        val taskTitleEditTxt = findViewById<EditText>(R.id.add_task_dialog_title)
-                        taskTitleEditTxt.setText(data.task_title)
-                        val taskDescEditTxt = findViewById<EditText>(R.id.add_task_dialog_task_description)
-                        taskDescEditTxt.setText(data.task_description)
+                        val taskTitleEditTxt = findViewById<TextInputLayout>(R.id.add_task_dialog_title)
+                        taskTitleEditTxt.editText!!.setText(data.task_title)
+                        val taskDescEditTxt = findViewById<TextInputLayout>(R.id.add_task_dialog_task_description)
+                        taskDescEditTxt.editText!!.setText(data.task_description)
 
                         negativeButton(text="Cancel")
                         positiveButton(text="Edit") { dialog ->
 
                             // Get edited text from edittext.
-                            Log.d("Title text", taskTitleEditTxt.text.toString())
-                            Log.d("Desc text", taskDescEditTxt.text.toString())
+                            Log.d("Title text", taskTitleEditTxt.editText!!.text.toString())
+                            Log.d("Desc text", taskDescEditTxt.editText!!.text.toString())
 
                             // Change in list.
-                            data.task_title = taskTitleEditTxt.text.toString()
-                            data.task_description = taskDescEditTxt.text.toString()
+                            data.task_title = taskTitleEditTxt.editText!!.text.toString()
+                            data.task_description = taskDescEditTxt.editText!!.text.toString()
 
                             // Change in DB.
                             todoDao.updateTask(data)
